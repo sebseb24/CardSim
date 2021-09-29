@@ -1,0 +1,64 @@
+{
+    "name": "PlayerInputs",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "fb2dc1e2-58f9-410a-9382-7d301128f324",
+            "actions": [
+                {
+                    "name": "ToggleCLI",
+                    "type": "Button",
+                    "id": "ec616cd2-3a05-4dc7-b06d-475126554802",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Return",
+                    "type": "Button",
+                    "id": "de9f4d7e-9cae-44fb-9ed6-2ef763824ac4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0cb7ccc-f22b-400c-b5f8-a55a490c3752",
+                    "path": "<Keyboard>/#(8)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCLI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e89117d-9dc1-4e55-bfce-5a0aa98c4bf4",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "CLIActions",
+            "bindingGroup": "CLIActions",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
