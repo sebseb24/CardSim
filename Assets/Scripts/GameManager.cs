@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         deck = new HDeck();
-        deck.PrintDeck();
-        IHCard firstCard = deck.DrawFirstCard();
+        // deck.PrintDeck();
+        // IHCard firstCard = deck.DrawFirstCard();
 
-        Debug.Log($"First card is : {firstCard.Name}");
+        // Debug.Log($"First card is : {firstCard.Name}");
     }
 }
