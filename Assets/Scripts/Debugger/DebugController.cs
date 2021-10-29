@@ -71,24 +71,39 @@ public class DebugController : MonoBehaviour
 
     private void HandleInput()
     {
-        string[] properties = input.Split(' ');
-
-        for (int i = 0; i < commandList.Count; i++)
+        if (!string.IsNullOrWhiteSpace(input))
         {
-            DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
+            string[] properties = input.Split(' ');
+            bool noCmdFound = true;
 
-            if (input.Contains(commandBase.commandId))
+            for (int i = 0; i < commandList.Count; i++)
             {
-                if (commandList[i] as DebugCommand != null)
+                DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
+
+                if (input.Contains(commandBase.commandId))
                 {
-                    // Cast to this type and invoke the command
-                    (commandList[i] as DebugCommand).Invoke();
+                    if (commandList[i] as DebugCommand != null)
+                    {
+                        (commandList[i] as DebugCommand).Invoke();
+
+                        noCmdFound = false;
+                    }
+                    else if (commandList[i] as DebugCommand<int> != null)
+                    {
+                        if (properties.Length == 2)
+                            (commandList[i] as DebugCommand<int>).Invoke(int.Parse(properties[1]));
+                        else
+                            Debug.Log("error : Invalid command, missing an int argument");
+
+                        noCmdFound = false;
+                    }
+                    cmdHistory.Add(input);
                 }
-                else if (commandList[i] as DebugCommand<int> != null)
-                {
-                    (commandList[i] as DebugCommand<int>).Invoke(int.Parse(properties[1]));
-                }
-                cmdHistory.Add(input);
+            }
+
+            if (noCmdFound)
+            {
+                Debug.Log("error : Invalid command, command not recognized");
             }
         }
     }
@@ -123,7 +138,6 @@ public class DebugController : MonoBehaviour
                 input = cmdHistory[++historyIndex];
             }
         }
-        
     }
 
     public void HistoryDown()
@@ -135,5 +149,12 @@ public class DebugController : MonoBehaviour
                 input = cmdHistory[--historyIndex];
             }
         }
+    }
+
+    public void ClearCommandHistory()
+    {
+        cmdHistory.Clear();
+        historyIndex = 0;
+        input = "";
     }
 }
